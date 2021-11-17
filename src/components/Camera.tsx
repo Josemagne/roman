@@ -31,8 +31,8 @@ const Camera = (setRomanNum) => {
       });
 
     // set the camera viewPort
-    // setWidth(document.body.clientWidth);
-    // setHeight(document.body.clientHeight);
+    setWidth(document.body.clientWidth);
+    setHeight(document.body.clientHeight);
   }, []);
 
   const takePicture = () => {
