@@ -1,3 +1,35 @@
 .camera {
   max-width: 90vw;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+
+  .cameraViewport {
+    position: relative;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+
+    .videoHolder {
+      max-width: 90%;
+
+      border-width: 2px;
+      border-color: black;
+      border-style: solid;
+    }
+
+    .takeISBN {
+      position: absolute;
+      z-index: 3;
+      color: red;
+      background-color: white;
+      border-radius: 10px;
+      top: 70%;
+      left: 30%;
+    }
+  }
+}
+
+.canvas {
+  display: none;
 }

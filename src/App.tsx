@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Display from "./components/Display";
 import Input from "./components/Input";
 
 function App() {
+  const [roman, setRomanNum] = useState<string>("");
+
   return (
     <div className="App">
-      <Input />
-      <Display />
+      <Input setRomanNum={setRomanNum} />
+      <Display roman={roman} />
     </div>
   );
 }

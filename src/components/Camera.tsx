@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import recognizeRoman from "../utils/recognizeRoman";
 
-interface Props {}
-
-const Camera = (props: Props) => {
+const Camera = (setRomanNum) => {
   const cameraRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -12,8 +10,6 @@ const Camera = (props: Props) => {
   const [stream, setStream] = useState<MediaStream>();
   const [takingPicture, setTakingPicture] = useState(false);
   const [photo, setPhoto] = useState();
-  const [roman, setRoman] = useState<string | void>();
-  const [widths, setWidths] = useState();
 
   // Defines if the "take picture btn was pressed"
   const [takenPicture, setTakenPicture] = useState(false);
@@ -35,35 +31,27 @@ const Camera = (props: Props) => {
       });
 
     // set the camera viewPort
-    setWidth(document.body.clientWidth);
-    setHeight(document.body.clientHeight);
+    // setWidth(document.body.clientWidth);
+    // setHeight(document.body.clientHeight);
   }, []);
 
   const takePicture = () => {
-    console.log(cameraRef.current);
-
     const context = canvasRef.current.getContext("2d");
 
     context.drawImage(cameraRef.current, 0, 0, width, height);
     const data = canvasRef.current.toDataURL("image/png");
     setPhoto(data);
 
-    const isbn = recognizeRoman(photo).then((roman) => {
-      setRoman(roman);
+    const roman = recognizeRoman(photo).then((roman) => {
+      setRomanNum(roman);
     });
   };
 
   return (
     <div className="camera">
-      <div className="cameraViewport" style={{ height: 500, width: 400 }}>
+      <div className="cameraViewport">
         {/* Box where the ISBN should be overlayed */}
-        <div
-          className="isbnHolder"
-          style={{
-            position: "absolute",
-            borderWidth: 6,
-          }}
-        ></div>
+        <div className="isbnHolder"></div>
 
         <video
           className="videoHolder"
@@ -79,23 +67,12 @@ const Camera = (props: Props) => {
             e.preventDefault();
             takePicture();
           }}
-          style={{
-            position: "absolute",
-            zIndex: 3,
-            color: "red",
-            border: "none",
-            top: "90%",
-            left: "50%",
-          }}
         >
           ISBN aufnehmen
         </button>
       </div>
 
       <canvas className="canvas" ref={canvasRef}></canvas>
-
-      {/* TODO rm this when finished */}
-      <p>{roman ? roman : null}</p>
     </div>
   );
 };

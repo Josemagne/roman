@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import Camera from "./Camera";
 
-interface Props {}
-
-const Input = (props: Props) => {
-  const [romans, setRomans] = useState("");
-
+const Input = (setRomanNum: any) => {
   return (
     <div className="input">
-      <Camera />
+      <Camera setRoman={setRomanNum} />
     </div>
   );
 };
