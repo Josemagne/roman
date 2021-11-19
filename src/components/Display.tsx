@@ -3,18 +3,19 @@ import romanToInt from "../utils/convertRomanToInteger";
 
 interface Props {
   roman: string;
+  result: number;
 }
 
-const Display = ({ roman }: Props) => {
-  const [result, setResult] = useState<number>();
+const Display = ({ roman, result }: Props) => {
+  const [number, setNumber] = useState<number>();
   const convert = () => {
-    setResult(romanToInt(roman));
+    setNumber(romanToInt(roman));
   };
   return (
     <div className="display">
       <div className="display__content">
         <p>Hier ist die römische Nummer:</p>
-        <p>{roman}</p>
+        <p>{result}</p>
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import recognizeRoman from "../utils/recognizeRoman";
+import evaluatePicture from "../utils/evaluatePicture";
 
-const Camera = (setRomanNum) => {
+const Camera = (setRomanNum: any, setResult: any) => {
   const cameraRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -43,7 +44,17 @@ const Camera = (setRomanNum) => {
     setPhoto(data);
 
     const roman = recognizeRoman(photo).then((roman) => {
-      setRomanNum(roman);
+      // TODO Change that
+      //   const number = evaluatePicture(roman);
+
+      console.log(roman);
+
+      if (roman) {
+        setResult(roman);
+      } else {
+        //   Throw err
+        throw new Error("tesseract.js returned something wrong");
+      }
     });
   };
 

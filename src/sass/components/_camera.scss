@@ -10,6 +10,17 @@
     border-color: black;
     border-style: solid;
 
+    .isbnHolder {
+      position: absolute;
+      top: 10%;
+      left: 33%;
+      width: 33%;
+      height: 10%;
+      border-color: black;
+      border-width: 1px;
+      border-style: solid;
+    }
+
     .videoHolder {
       max-width: 90%;
 
@@ -25,7 +36,7 @@
       background-color: white;
       border-radius: 10px;
       top: 70%;
-      left: 30%;
+      left: 33%;
     }
   }
 }

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Camera from "./Camera";
 
-const Input = (setRomanNum: any) => {
+const Input = (setRomanNum: any, setResult: any) => {
   return (
     <div className="input">
-      <Camera setRoman={setRomanNum} />
+      <Camera setRomanNum={setRomanNum} setResult={setResult} />
     </div>
   );
 };
