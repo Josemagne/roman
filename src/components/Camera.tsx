@@ -2,8 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import recognizeRoman from "../utils/recognizeRoman";
 import evaluatePicture from "../utils/evaluatePicture";
 
-const Camera = (setRomanNum: any, setResult: any) => {
-  const cameraRef = useRef(null);
+const Camera = (
+  setRomanNum: any,
+  setResult: any,
+  setClicked: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  const cameraRef = useRef<null>(null);
   const canvasRef = useRef(null);
 
   const [width, setWidth] = useState<number>();
@@ -24,7 +28,9 @@ const Camera = (setRomanNum: any, setResult: any) => {
       })
       .then((stream) => {
         setStream(stream);
+
         cameraRef.current.srcObject = stream;
+
         cameraRef.current.play();
       })
       .catch((err) => {
@@ -59,31 +65,34 @@ const Camera = (setRomanNum: any, setResult: any) => {
   };
 
   return (
-    <div className="camera">
-      <div className="cameraViewport">
-        {/* Box where the ISBN should be overlayed */}
-        <div className="isbnHolder"></div>
+    <div className="input">
+      <div className="camera">
+        <div className="cameraViewport">
+          {/* Box where the ISBN should be overlayed */}
+          <div className="isbnHolder"></div>
 
-        <video
-          className="videoHolder"
-          ref={cameraRef}
-          onCanPlay={function (e) {
-            e.currentTarget.width = 400;
-          }}
-        ></video>
-        {/* Takes picture */}
-        <button
-          className="takeISBN"
-          onClick={(e) => {
-            e.preventDefault();
-            takePicture();
-          }}
-        >
-          ISBN aufnehmen
-        </button>
+          <video
+            className="videoHolder"
+            ref={cameraRef}
+            onCanPlay={function (e) {
+              e.currentTarget.width = 400;
+            }}
+          ></video>
+          {/* Takes picture */}
+          <button
+            className="takeISBN"
+            onClick={(e) => {
+              e.preventDefault();
+              setClicked(true);
+              takePicture();
+            }}
+          >
+            ISBN aufnehmen
+          </button>
+        </div>
+
+        <canvas className="canvas" ref={canvasRef}></canvas>
       </div>
-
-      <canvas className="canvas" ref={canvasRef}></canvas>
     </div>
   );
 };

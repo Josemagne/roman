@@ -3,10 +3,11 @@ import romanToInt from "../utils/convertRomanToInteger";
 
 interface Props {
   roman: string;
-  result: number;
+  result: number | undefined;
+  clicked: boolean;
 }
 
-const Display = ({ roman, result }: Props) => {
+const Display = ({ roman, result, clicked }: Props) => {
   const [number, setNumber] = useState<number>();
   const convert = () => {
     setNumber(romanToInt(roman));
@@ -14,7 +15,28 @@ const Display = ({ roman, result }: Props) => {
   return (
     <div className="display">
       <div className="display__content">
-        <p>Hier ist die römische Nummer:</p>
+        <div>
+          <p>Hier die römische Nummer:</p>
+          {clicked ? (
+            number ? (
+              <div className="card" style={{ width: "100px" }}>
+                <div className="card-body">
+                  <div className="card-text">{number}</div>
+                </div>
+              </div>
+            ) : (
+              <div className="spinner-border">
+                <span></span>
+              </div>
+            )
+          ) : (
+            <div className="card" style={{ width: "100px" }}>
+              <div className="card-body">
+                <div className="card-text"></div>
+              </div>
+            </div>
+          )}
+        </div>
         <p>{result}</p>
       </div>
     </div>

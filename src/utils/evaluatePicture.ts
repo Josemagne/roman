@@ -4,14 +4,12 @@
  */
 const evaluatePicture = (result: string) => {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    // Counts how many nonnumbers are in the string
-    let nonNumbers = 0;
+
     let finalResult = [];
     for (let i = 0; i < result.length; i++) {
         if (numbers.includes(Number(result[i]))) {
+            // Add the number to finalResult
             finalResult.push(Number(result[i]));
-        } else {
-            nonNumbers++;
         }
     }
 
