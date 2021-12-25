@@ -1,5 +1,4 @@
 import { createWorker } from "tesseract.js";
-import roman from "../data/roman.jpg";
 
 /**
  * Util function that uses tesseract.js to get the text of an image
@@ -18,7 +17,7 @@ const recognizeRoman = (image: any): Promise<string> => {
     const {
       data: { text },
       //   TODO change that
-    } = await worker.recognize(roman);
+    } = await worker.recognize(image);
     await worker.terminate();
     return text;
   };
