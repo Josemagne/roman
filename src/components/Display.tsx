@@ -1,17 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import romanToInt from "../utils/convertRomanToInteger";
+import lssv from "lssv";
+import { Spinner } from "react-bootstrap";
 
 interface Props {
-  roman: string;
-  result: number | undefined;
+  result: string | undefined;
   clicked: boolean;
 }
 
-const Display = ({ roman, result, clicked }: Props) => {
+const Display = ({ result: roman, clicked }: Props) => {
   const [number, setNumber] = useState<number>();
+
   const convert = () => {
-    setNumber(romanToInt(roman));
+    if (roman) {
+      setNumber(romanToInt(roman));
+    }
   };
+
+  useEffect(() => {
+    if (roman) {
+      convert();
+      console.log("Got number!");
+    }
+  }, [roman]);
+
   return (
     <div className="display">
       <div className="display__content">
@@ -19,14 +31,21 @@ const Display = ({ roman, result, clicked }: Props) => {
           <p>Hier die römische Nummer:</p>
           {clicked ? (
             number ? (
-              <div className="card" style={{ width: "100px" }}>
+              <div className="card display__number" style={{ width: "100px" }}>
                 <div className="card-body">
                   <div className="card-text">{number}</div>
                 </div>
               </div>
             ) : (
-              <div className="spinner-border">
-                <span></span>
+              <div className="card" style={{ width: "100px" }}>
+                <div className="card-body">
+                  <div className="card-text">
+                    {/* Spinner */}
+                    <Spinner animation="border" role="status">
+                      <span className="visually-hidden"></span>
+                    </Spinner>
+                  </div>
+                </div>
               </div>
             )
           ) : (
@@ -37,7 +56,6 @@ const Display = ({ roman, result, clicked }: Props) => {
             </div>
           )}
         </div>
-        <p>{result}</p>
       </div>
     </div>
   );

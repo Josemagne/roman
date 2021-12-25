@@ -23,8 +23,18 @@
   justify-content: center;
 }
 
+/* ANCHOR Display */
+
 .display {
   padding: 1rem;
-  margin-top: 10%;
+  margin-top: 5%;
   grid-area: "display";
+  display: flex;
+  justify-content: center;
+
+  .display__content {
+    color: rgb(107, 105, 105);
+    background-color: #83e783;
+    padding: 5%;
+  }
 }

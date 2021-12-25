@@ -80,7 +80,7 @@ if (isProduction) {
     compress: true,
     hot: true,
     host: "localhost",
-    port: 5000,
+    port: 5001,
     open: true,
   };
 }

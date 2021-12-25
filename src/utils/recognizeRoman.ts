@@ -6,7 +6,7 @@ import roman from "../data/roman.jpg";
  * @param image The image from Input.tsx
  * @returns The roman number as string
  */
-const recognizeRoman = (image: any) => {
+const recognizeRoman = (image: any): Promise<string> => {
   const worker = createWorker({
     logger: (m) => console.log(m),
   });

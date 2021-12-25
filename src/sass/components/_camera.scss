@@ -1,32 +1,27 @@
 .camera {
   max-width: 90vw;
-  border-style: solid;
-  border-width: 1px;
-  border-color: black;
+  margin-top: 5%;
 
   .cameraViewport {
     position: relative;
-    border-width: 2px;
-    border-color: black;
-    border-style: solid;
 
     .isbnHolder {
       position: absolute;
       top: 10%;
       left: 33%;
       width: 33%;
+      min-height: 30px;
       height: 10%;
-      border-color: black;
-      border-width: 1px;
+      border-color: red;
+      border-width: 3px;
       border-style: solid;
     }
 
     .videoHolder {
+      min-width: 300px;
       max-width: 90%;
 
-      border-width: 2px;
-      border-color: black;
-      border-style: solid;
+      background-color: rgb(103, 103, 202);
     }
 
     .takeISBN {
@@ -39,8 +34,4 @@
       left: 33%;
     }
   }
-}
-
-.canvas {
-  display: none;
 }

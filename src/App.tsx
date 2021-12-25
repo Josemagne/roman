@@ -3,20 +3,30 @@ import Camera from "./components/Camera";
 import Display from "./components/Display";
 
 function App() {
-  const [roman, setRomanNum] = useState<string>("");
-  const [result, setResult] = useState<number>();
-  // Decides if user clicked on btn
+  // Decides if the btn was clicked
   const [clicked, setClicked] = useState<boolean>(false);
+  const [result, setResult] = useState<string | undefined>();
+  // Decides if user clicked on btn
+
+  /**
+   * Sets the roman number
+   * @param result Roman number
+   */
+  const changeResult = (result: string) => {
+    setResult(result);
+    console.log("Changed the result!");
+  };
+
+  const changeClick = () => {
+    setClicked(true);
+  };
 
   return (
     <div className="App">
-      <Camera
-        setRomanNum={setRomanNum}
-        setResult={setResult}
-        setClicked={setClicked}
-      />
+      {/* NOTE Takes the picture and sends it to tesseract.js */}
+      <Camera changeClick={changeClick} changeResult={changeResult} />
       {/* NOTE Shows us the result of tesseract.js */}
-      <Display roman={roman} result={result} clicked={clicked} />
+      <Display result={result} clicked={clicked} />
     </div>
   );
 }

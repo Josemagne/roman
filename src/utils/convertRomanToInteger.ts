@@ -6,15 +6,13 @@ const integers = [1, 5, 10, 50, 100, 500, 1000];
 const romanToInt = (s: string) => {
 
 
+
     let integers = convertRomanToInteger(s);
-    console.log(integers);
+    console.log("bfore:  ", integers)
+    // Remove undefineds
+    integers = removeUndefined(integers);
 
-    if (integers.every((num) => {
-        return (integers[0] === num)
-    })) { return integers.reduce((preveiousValue, currentValue) => preveiousValue + currentValue) }
     console.log("integers: ", integers);
-
-
 
     let polished = testFor3i(integers)
     console.log("polished1: ", polished);
@@ -30,6 +28,19 @@ const romanToInt = (s: string) => {
     let result = calculate(polished, biggestIndex);
 
     console.log("result: ", result);
+
+    return result;
+}
+
+const removeUndefined = (arr: number[]): number[] => {
+    // Arr that we return
+    let result = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i]) {
+            result.push(arr[i])
+        }
+    }
 
     return result;
 }

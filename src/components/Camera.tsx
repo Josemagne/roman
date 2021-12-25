@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import recognizeRoman from "../utils/recognizeRoman";
 import evaluatePicture from "../utils/evaluatePicture";
+import lssv from "lssv";
 
-const Camera = (
-  setRomanNum: any,
-  setResult: any,
-  setClicked: React.Dispatch<React.SetStateAction<boolean>>
-) => {
+interface Props {
+  changeClick: () => void;
+  changeResult: (result: string) => void;
+}
+
+const Camera = ({ changeClick, changeResult }: Props) => {
+  const l = new lssv();
+
   const cameraRef = useRef<null>(null);
   const canvasRef = useRef(null);
 
@@ -15,9 +19,19 @@ const Camera = (
   const [stream, setStream] = useState<MediaStream>();
   const [takingPicture, setTakingPicture] = useState(false);
   const [photo, setPhoto] = useState();
+  const [cameraStyle, setCameraStyle] = useState({
+    opacity: 1,
+  });
 
   // Defines if the "take picture btn was pressed"
   const [takenPicture, setTakenPicture] = useState(false);
+
+  const hideCamera = () => {
+    setCameraStyle((before) => {
+      before.opacity = 0.1;
+      return before;
+    });
+  };
 
   useEffect(() => {
     // TODO let user decide when he is ready to add books
@@ -50,13 +64,8 @@ const Camera = (
     setPhoto(data);
 
     const roman = recognizeRoman(photo).then((roman) => {
-      // TODO Change that
-      //   const number = evaluatePicture(roman);
-
-      console.log(roman);
-
       if (roman) {
-        setResult(roman);
+        changeResult(roman);
       } else {
         //   Throw err
         throw new Error("tesseract.js returned something wrong");
@@ -66,7 +75,7 @@ const Camera = (
 
   return (
     <div className="input">
-      <div className="camera">
+      <div className="camera" style={{}}>
         <div className="cameraViewport">
           {/* Box where the ISBN should be overlayed */}
           <div className="isbnHolder"></div>
@@ -83,11 +92,12 @@ const Camera = (
             className="takeISBN"
             onClick={(e) => {
               e.preventDefault();
-              setClicked(true);
+              changeClick();
               takePicture();
+              hideCamera();
             }}
           >
-            ISBN aufnehmen
+            Bild aufnehmen
           </button>
         </div>
 
